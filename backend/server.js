@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 // Initialize Google Generative AI
-const genAI = new GoogleGenerativeAI("AIzaSyBShWuq3-XNtDWCGJDR9tQsk083mfAUNe0");
+const genAI = new GoogleGenerativeAI("api key");
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 wss.on("connection", (ws) => {
