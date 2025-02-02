@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 // Initialize Google Generative AI
-const genAI = new GoogleGenerativeAI("api key");
+const genAI = new GoogleGenerativeAI("AIzaSyBShWuq3-XNtDWCGJDR9tQsk083mfAUNe0");
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 wss.on("connection", (ws) => {
@@ -37,17 +37,6 @@ wss.on("connection", (ws) => {
 
       ws.send(JSON.stringify({ text: aiResponse }));
       say.speak(aiResponse);
-      // Convert response to speech using gTTS
-      // const ttsFilePath = path.join(__dirname, "response.mp3");
-      // exec(`gtts-cli "${aiResponse}" --output "${ttsFilePath}"`, (err) => {
-      //   if (err) {
-      //     console.error("Error generating speech:", err);
-      //     ws.send(JSON.stringify({ text: "Error in TTS processing" }));
-      //     return;
-      //   }
-      //   const audioStream = fs.readFileSync(ttsFilePath);
-      //   ws.send(audioStream);
-      // });
     } catch (error) {
       console.error("Error processing request:", error);
       ws.send(JSON.stringify({ text: "Sorry, something went wrong." }));

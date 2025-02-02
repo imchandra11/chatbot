@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 const socket = new WebSocket("ws://localhost:5000");
-
+import "./App.css";
 const VoiceChatbot = () => {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
@@ -41,11 +41,11 @@ const VoiceChatbot = () => {
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "600px", margin: "auto"}}>
+    <div className="container">
       <h2>Voice Chatbot</h2>
-      <div style={{ border: "2px solid red", padding: "10px", height: "300px", overflowY: "auto" }}>
+      <div className="chat-box">
         {chat.map((msg, index) => (
-          <p key={index} style={{ color: msg.type === "user" ? "blue" : "green" }}>
+          <p key={index} className={`chat-message ${msg.type}`}>
             {msg.type === "user" ? "You: " : "Bot: "} {msg.text}
           </p>
         ))}
@@ -56,8 +56,8 @@ const VoiceChatbot = () => {
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Type a message..."
       />
-      <button onClick={sendMessage}>Send</button>
-      <button onClick={startRecording} disabled={isRecording}>
+      <button className="send-btn" onClick={sendMessage}>Send</button>
+      <button className="record-btn" onClick={startRecording} disabled={isRecording}>
         {isRecording ? "Listening..." : "Speak"}
       </button>
     </div>
